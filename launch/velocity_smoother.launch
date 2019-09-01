@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="node_name" default="velocity_smoother_node"/>
+    <arg name="input_topic" default="/current_velocity"/>
 
     <node pkg="velocity_smoother" type="velocity_smoother_node" name="$(arg node_name)" output="log" respawn="true" respawn_delay="0">
+        <param name="input_topic" value="$(arg input_topic)"/>
     </node>
 </launch>

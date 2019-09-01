@@ -19,6 +19,8 @@ namespace velocity_smoother
         nh_ = nh;
         pnh_ = pnh;
         pnh_.param<std::string>("input_topic", input_topic_, "input");
+        params_callback_func_ = boost::bind(&VelocitySmoother::paramCllback, this, _1, _2);
+        server_.setCallback(params_callback_func_);
     }
 
     VelocitySmoother::~VelocitySmoother()
@@ -39,12 +41,12 @@ namespace velocity_smoother
         use_twist_stamped_ = config.use_twist_stamped;
         if(use_twist_stamped_)
         {
-            twist_pub_ = nh_.advertise<geometry_msgs::TwistStamped>(input_topic_,1);
+            twist_pub_ = nh_.advertise<geometry_msgs::TwistStamped>(input_topic_+"/smoothed",1);
             twist_sub_ = nh_.subscribe(input_topic_,1,&VelocitySmoother::twistStampedCallback,this);
         }
         else
         {
-            twist_pub_ = nh_.advertise<geometry_msgs::Twist>(input_topic_,1);
+            twist_pub_ = nh_.advertise<geometry_msgs::Twist>(input_topic_+"/smoothed",1);
             twist_sub_ = nh_.subscribe(input_topic_,1,&VelocitySmoother::twistCallback,this);
         }
         return;
@@ -68,7 +70,7 @@ namespace velocity_smoother
 
     void VelocitySmoother::update(geometry_msgs::TwistStamped twist)
     {
-        if(current_twist_)
+        if(!current_twist_)
         {
             current_twist_ = twist;
         }

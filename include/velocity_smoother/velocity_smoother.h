@@ -4,6 +4,7 @@
 // Headers in ROS
 #include <ros/ros.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <dynamic_reconfigure/server.h>
 
 // Headers in this package
 #include <velocity_smoother/VelocitySmootherConfig.h>
@@ -36,6 +37,8 @@ namespace velocity_smoother
         ros::NodeHandle nh_;
         ros::Subscriber twist_sub_;
         ros::Publisher twist_pub_;
+        dynamic_reconfigure::Server<velocity_smoother::VelocitySmootherConfig> server_;
+        dynamic_reconfigure::Server<velocity_smoother::VelocitySmootherConfig>::CallbackType params_callback_func_;
     };
 }
 
