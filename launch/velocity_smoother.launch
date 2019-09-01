@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="node_name" default="velocity_smoother_node"/>
+
+    <node pkg="velocity_smoother" type="velocity_smoother_node" name="$(arg node_name)" output="log" respawn="true" respawn_delay="0">
+    </node>
+</launch>
