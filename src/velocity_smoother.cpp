@@ -80,9 +80,9 @@ namespace velocity_smoother
             current_twist_->twist.linear.x = k_longitudinal_*current_twist_->twist.linear.x + (1-k_longitudinal_)*twist.twist.linear.x;
             current_twist_->twist.linear.y = k_lateral_*current_twist_->twist.linear.y + (1-k_lateral_)*twist.twist.linear.y;
             current_twist_->twist.linear.z = k_vertical_*current_twist_->twist.linear.z + (1-k_vertical_)*twist.twist.linear.z;
-            current_twist_->twist.angular.x = k_roll_*current_twist_->twist.angular.x + (1-k_roll_)*current_twist_->twist.angular.x;
-            current_twist_->twist.angular.y = k_pitch_*current_twist_->twist.angular.y + (1-k_pitch_)*current_twist_->twist.angular.y;
-            current_twist_->twist.angular.z = k_yaw_*current_twist_->twist.angular.z + (1-k_yaw_)*current_twist_->twist.angular.z;
+            current_twist_->twist.angular.x = k_roll_*current_twist_->twist.angular.x + (1-k_roll_)*twist.twist.angular.x;
+            current_twist_->twist.angular.y = k_pitch_*current_twist_->twist.angular.y + (1-k_pitch_)*twist.twist.angular.y;
+            current_twist_->twist.angular.z = k_yaw_*current_twist_->twist.angular.z + (1-k_yaw_)*twist.twist.angular.z;
             if(use_twist_stamped_)
             {
                 twist_pub_.publish(*current_twist_);
