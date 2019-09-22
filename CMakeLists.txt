@@ -27,11 +27,11 @@ include_directories(
 
 add_library(velocity_smoother src/velocity_smoother.cpp)
 target_link_libraries(velocity_smoother ${catkin_LIBRARIES})
-add_dependencies(velocity_smoother ${catkin_EXPORTED_TARGETS})
+add_dependencies(velocity_smoother ${catkin_EXPORTED_TARGETS} velocity_smoother_gencfg)
 
 add_executable(velocity_smoother_node src/velocity_smoother_node.cpp)
 target_link_libraries(velocity_smoother_node ${catkin_LIBRARIES} velocity_smoother)
-add_dependencies(velocity_smoother_node velocity_smoother ${catkin_EXPORTED_TARGETS})
+add_dependencies(velocity_smoother_node velocity_smoother ${catkin_EXPORTED_TARGETS} velocity_smoother_gencfg)
 
 # Install header files
 install(DIRECTORY include/${PROJECT_NAME}/
